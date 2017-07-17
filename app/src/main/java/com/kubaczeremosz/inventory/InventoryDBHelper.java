@@ -21,7 +21,7 @@ public class InventoryDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        //do something
     }
 
     private static final String SQL_CREATE_ENTRIES =
@@ -31,8 +31,5 @@ public class InventoryDBHelper extends SQLiteOpenHelper {
                     InventoryEntry.COLUMN_QUANTITY + " INTEGER NOT NULL," +
                     InventoryEntry.COLUMN_PRICE + " INTEGER NOT NULL," +
                     InventoryEntry.COLUMN_IMAGE + " TEXT )";
-
-    private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + InventoryEntry.TABLE_NAME;
 }
 

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.kubaczeremosz.inventory.InventoryActivity"
+    android:background="@drawable/alchemy"
     >
 
     <ListView
@@ -35,7 +36,7 @@
             android:padding="20dp"
             android:textSize="20dp"
             android:text="@string/empty_view_text"
-            android:textColor="#A2AAB0"/>
+            android:textColor="@color/colorPrimaryDark"/>
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -44,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        />
 
 </android.support.design.widget.CoordinatorLayout>

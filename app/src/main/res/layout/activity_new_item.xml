@@ -6,56 +6,86 @@
     android:layout_height="match_parent"
     tools:context="com.kubaczeremosz.inventory.NewItemActivity"
     android:orientation="vertical"
+    android:background="@drawable/alchemy"
     >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_item_back">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_chevron_left"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goback"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:layout_gravity="center"
+            />
+        </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter new product"
+        android:text="@string/enter_new_product"
         android:textSize="25sp"
         android:gravity="center"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimaryOpacity"/>
 
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="@string/item_name"
         android:id="@+id/edit_item_name"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:background="@color/colorCreamOpacity"/>
 
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="@string/item_quantity"
         android:id="@+id/edit_item_quantity"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:background="@color/colorCreamOpacity"
+        android:padding="10dp"/>
 
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="@string/item_price"
         android:id="@+id/edit_item_price"
-        android:layout_gravity="center"/>
+        android:background="@color/colorCreamOpacity"
+        android:layout_gravity="center"
+        android:padding="10dp"/>
 
     <ImageView
-        android:layout_marginTop="20dp"
         android:id="@+id/edit_item_image_view"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/barcodeproduct"/>
 
     <Button
-        android:layout_marginTop="20dp"
-        android:layout_width="150dp"
+        android:layout_margin="15dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="@string/add_image"
         android:layout_gravity="center"
         android:id="@+id/add_image"/>
 
     <Button
-        android:layout_width="150dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="@string/add_new_item"
         android:layout_gravity="center"
-        android:id="@+id/add_item"/>
+        android:id="@+id/add_item"
+        android:textColor="@color/colorPrimaryDark"/>
 
 </LinearLayout>

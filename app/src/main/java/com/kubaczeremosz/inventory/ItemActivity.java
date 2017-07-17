@@ -39,6 +39,7 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
     private Button mDec;
     private Button mOrder;
     private Button mDelete;
+    private View mBack;
 
 
     @Override
@@ -47,15 +48,16 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_item);
 
         Intent intent = getIntent();
-        mCurrentItemUri=intent.getData();
-        mNameTextView= (TextView)findViewById(R.id.item_edit_name);
-        mQuantityTextView =(TextView)findViewById(R.id.item_edit_quantity);
-        mPriceTextView =(TextView)findViewById(R.id.item_edit_price);
-        mImageView=(ImageView)findViewById(R.id.item_image);
-        mAdd=(Button)findViewById(R.id.add_quantity);
-        mDec=(Button)findViewById(R.id.dec_quantity);
-        mOrder=(Button)findViewById(R.id.order_item);
-        mDelete=(Button)findViewById(R.id.delete_item);
+        mCurrentItemUri = intent.getData();
+        mNameTextView = (TextView) findViewById(R.id.item_edit_name);
+        mQuantityTextView = (TextView) findViewById(R.id.item_edit_quantity);
+        mPriceTextView = (TextView) findViewById(R.id.item_edit_price);
+        mImageView = (ImageView) findViewById(R.id.item_image);
+        mAdd = (Button) findViewById(R.id.add_quantity);
+        mDec = (Button) findViewById(R.id.dec_quantity);
+        mOrder = (Button) findViewById(R.id.order_item);
+        mDelete = (Button) findViewById(R.id.delete_item);
+        mBack=(View)findViewById(R.id.item_back);
 
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,14 +65,12 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
                 addQuantity();
             }
         });
-
         mDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 decQuantity();
             }
         });
-
         mOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,10 +83,14 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
                 showDeleteConfirmationDialog();
             }
         });
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         getLoaderManager().initLoader(EXISTING_ITEM_LOADER, null, this);
-
-
     }
 
 
@@ -109,7 +113,6 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
-
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data == null || data.getCount() < 1) {
@@ -122,12 +125,11 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
             int priceColumnIndex = data.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_PRICE);
             int imageColumnIndex = data.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_IMAGE);
 
-
             // Extract out the value from the Cursor for the given column index
             String name = data.getString(nameColumnIndex);
             int quantity = data.getInt(quantityColumnIndex);
             int price = data.getInt(priceColumnIndex);
-            final String image=data.getString(imageColumnIndex);
+            final String image = data.getString(imageColumnIndex);
 
             // Update the views on the screen with the values from the database
             mNameTextView.setText(name);
@@ -142,7 +144,6 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
                     mImageView.setImageBitmap(getBitmapFromUri(Uri.parse(image)));
                 }
             });
-
         }
     }
 
@@ -152,7 +153,6 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
         mNameTextView.setText("");
         mQuantityTextView.setText("");
         mPriceTextView.setText("");
-
     }
 
     public Bitmap getBitmapFromUri(Uri uri) {
@@ -205,8 +205,7 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
-
-    private void deleteItem(){
+    private void deleteItem() {
         // Only perform the delete if this is an existing pet.
         if (mCurrentItemUri != null) {
             getContentResolver().delete(mCurrentItemUri, null, null);
@@ -239,33 +238,39 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
         alertDialog.show();
     }
 
-    private void addQuantity(){
-        String quantityString =mQuantityTextView.getText().toString();
+    private void addQuantity() {
+        String quantityString = mQuantityTextView.getText().toString();
         int quantity = Integer.parseInt(quantityString);
 
         quantity++;
 
         ContentValues values = new ContentValues();
-        values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY,quantity);
+        values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY, quantity);
         getContentResolver().update(mCurrentItemUri, values, null, null);
 
     }
 
-    private void decQuantity(){
-        String quantityString =mQuantityTextView.getText().toString();
+    private void decQuantity() {
+        String quantityString = mQuantityTextView.getText().toString();
         int quantity = Integer.parseInt(quantityString);
-        if(quantity>=0){
+        if (quantity >= 0) {
             quantity--;
         }
 
         ContentValues values = new ContentValues();
-        values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY,quantity);
+        values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY, quantity);
         getContentResolver().update(mCurrentItemUri, values, null, null);
 
     }
 
-    private void orderItem(){
+    private void orderItem() {
 
-        Intent intent= new Intent();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_EMAIL, "suplier@emailaddress.com");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Suplly");
+        intent.putExtra(Intent.EXTRA_TEXT, "I need some suplly.");
+
+        startActivity(Intent.createChooser(intent, "Send Email"));
     }
 }

@@ -2,7 +2,6 @@ package com.kubaczeremosz.inventory;
 
 import android.app.LoaderManager;
 import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -13,7 +12,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 
@@ -21,7 +19,7 @@ import com.kubaczeremosz.inventory.InventoryContract.InventoryEntry;
 
 public class InventoryActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static final int INVENTORY_LOADER=0;
+    private static final int INVENTORY_LOADER = 0;
 
     InventoryCursorAdapter mCursorAdapter;
 
@@ -44,7 +42,7 @@ public class InventoryActivity extends AppCompatActivity implements LoaderManage
         View emptyView = findViewById(R.id.empty_view);
         inventoryListView.setEmptyView(emptyView);
 
-        mCursorAdapter=new InventoryCursorAdapter(this,null);
+        mCursorAdapter = new InventoryCursorAdapter(this, null);
         inventoryListView.setAdapter(mCursorAdapter);
 
         inventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -59,7 +57,7 @@ public class InventoryActivity extends AppCompatActivity implements LoaderManage
         });
 
 
-        getLoaderManager().initLoader(INVENTORY_LOADER,null,this);
+        getLoaderManager().initLoader(INVENTORY_LOADER, null, this);
     }
 
     @Override

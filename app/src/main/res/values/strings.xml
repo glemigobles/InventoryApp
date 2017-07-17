@@ -26,4 +26,6 @@
     <string name="add_image">Add image</string>
     <string name="action_select_picture">Select picture</string>
     <string name="insert_image_failed">Please, add item image.</string>
+    <string name="goback">BACK</string>
+    <string name="enter_new_product">Enter new product</string>
 </resources>

@@ -38,6 +38,7 @@ public class NewItemActivity extends AppCompatActivity {
     private Button mAddImage;
     private ImageView mImageView;
     private Uri mImageUri=null;
+    private View mBack;
 
     private final static int SELECT_PHOTO = 200;
 
@@ -78,6 +79,13 @@ public class NewItemActivity extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, getString(R.string.action_select_picture)), SELECT_PHOTO);
             }
 
+        });
+        mBack=(View)findViewById(R.id.new_item_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
 
     }
@@ -151,7 +159,7 @@ public class NewItemActivity extends AppCompatActivity {
     }
 
 
-    public void insertItem() {
+    private void insertItem() {
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String nameString = mNameEditText.getText().toString().trim();
@@ -173,9 +181,10 @@ public class NewItemActivity extends AppCompatActivity {
         //inserting
         Uri newUri = getContentResolver().insert(InventoryContract.InventoryEntry.CONTENT_URI, values);
         showToast(R.string.insert_item_successful);
+        clearFields();
     }
 
-    public boolean validateInput() {
+    private boolean validateInput() {
         if (mNameEditText.getText().toString().matches("") || mQuantityEditText.getText().toString().matches("") || mPriceEditText.getText().toString().matches("")) {
             showToast(R.string.insert_item_insertdata);
             return false;
@@ -186,17 +195,18 @@ public class NewItemActivity extends AppCompatActivity {
         else if (isNumeric(mQuantityEditText.getText().toString()) && isNumeric(mPriceEditText.getText().toString())) {
             return true;
         }
+        showToast(R.string.insert_item_failed);
         return false;
     }
 
 
-    public void showToast(int Rstring){
+    private void showToast(int Rstring){
         Toast.makeText(getApplicationContext(), getString(Rstring),
                 Toast.LENGTH_SHORT).show();
 
     }
 
-    public boolean isNumeric(String str){
+    private boolean isNumeric(String str){
         try
         {
             double d = Double.parseDouble(str);
@@ -206,6 +216,13 @@ public class NewItemActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    private void clearFields(){
+        mNameEditText.setText("");
+        mQuantityEditText.setText("");
+        mPriceEditText.setText("");
+        mImageView.setImageResource(R.drawable.barcodeproduct);
+        mImageUri=null;
     }
 
 

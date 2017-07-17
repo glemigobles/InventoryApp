@@ -20,9 +20,10 @@ import android.widget.Toast;
 public class InventoryCursorAdapter extends CursorAdapter {
 
     private static Context mContext;
+
     public InventoryCursorAdapter(Context context, Cursor c) {
         super(context, c, 0);
-        mContext=context;
+        mContext = context;
     }
 
     @Override
@@ -33,7 +34,6 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
-
 
         TextView nameTextView = (TextView) view.findViewById(R.id.item_name);
         TextView priceTextView = (TextView) view.findViewById(R.id.item_price);
@@ -63,18 +63,16 @@ public class InventoryCursorAdapter extends CursorAdapter {
         });
     }
 
-    private void sell(Context context, Uri itemUri, int quantity){
+    private void sell(Context context, Uri itemUri, int quantity) {
 
-        if(quantity>0){
+        if (quantity > 0) {
             quantity--;
-        }
-        else{
+        } else {
             Toast.makeText(context, context.getString(R.string.outofstock),
                     Toast.LENGTH_SHORT).show();
         }
         ContentValues values = new ContentValues();
-        values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY,quantity);
+        values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY, quantity);
         context.getContentResolver().update(itemUri, values, null, null);
-
     }
 }
