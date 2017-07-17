@@ -10,6 +10,17 @@
         android:textSize="25sp"
         android:gravity="center"
         android:layout_margin="10dp"/>
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"
+        android:src="@drawable/barcodeproduct"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

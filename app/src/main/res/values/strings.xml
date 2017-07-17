@@ -20,4 +20,10 @@
     <string name="Price">Price</string>
     <string name="empty_view_text">No data to display, to add products, click on round button in bottom-right corner.</string>
     <string name="product_price">Price</string>
+    <string name="delete_dialog_msg">Are You sure about delete this item?</string>
+    <string name="cancel">cancel</string>
+    <string name="outofstock">Out of stock!</string>
+    <string name="add_image">Add image</string>
+    <string name="action_select_picture">Select picture</string>
+    <string name="insert_image_failed">Please, add item image.</string>
 </resources>

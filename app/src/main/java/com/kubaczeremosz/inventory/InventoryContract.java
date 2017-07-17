@@ -28,6 +28,7 @@ public class InventoryContract {
         public final static String COLUMN_NAME = "name";
         public final static String COLUMN_QUANTITY= "quantity";
         public final static String COLUMN_PRICE= "price";
+        public final static String COLUMN_IMAGE= "image";
 
         public static boolean isValidQ(int quantity) {
             if (quantity>=0) {
