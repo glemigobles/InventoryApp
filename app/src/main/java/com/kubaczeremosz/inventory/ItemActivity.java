@@ -224,14 +224,8 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
                 deleteItem();
             }
         });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+        builder.setNegativeButton(R.string.cancel,null);
 
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
-            }
-        });
 
         // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
@@ -253,7 +247,7 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
     private void decQuantity() {
         String quantityString = mQuantityTextView.getText().toString();
         int quantity = Integer.parseInt(quantityString);
-        if (quantity >= 0) {
+        if (quantity > 0) {
             quantity--;
         }
 
@@ -267,9 +261,10 @@ public class ItemActivity extends AppCompatActivity implements LoaderManager.Loa
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_EMAIL, "suplier@emailaddress.com");
+        String product=mNameTextView.getText().toString();
+        intent.putExtra(Intent.EXTRA_EMAIL, "suplier@gmail.com");
         intent.putExtra(Intent.EXTRA_SUBJECT, "Suplly");
-        intent.putExtra(Intent.EXTRA_TEXT, "I need some suplly.");
+        intent.putExtra(Intent.EXTRA_TEXT, "I need some "+ product+" suplly.");
 
         startActivity(Intent.createChooser(intent, "Send Email"));
     }

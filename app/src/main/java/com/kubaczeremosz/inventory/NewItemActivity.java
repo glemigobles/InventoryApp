@@ -185,7 +185,7 @@ public class NewItemActivity extends AppCompatActivity {
     }
 
     private boolean validateInput() {
-        if (mNameEditText.getText().toString().matches("") || mQuantityEditText.getText().toString().matches("") || mPriceEditText.getText().toString().matches("")) {
+        if (mNameEditText.getText().toString().isEmpty() || mQuantityEditText.getText().toString().isEmpty() || mPriceEditText.getText().toString().isEmpty()) {
             showToast(R.string.insert_item_insertdata);
             return false;
         }else if(mImageUri==null){
